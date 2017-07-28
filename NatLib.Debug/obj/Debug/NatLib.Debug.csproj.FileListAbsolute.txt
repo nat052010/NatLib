@@ -1,0 +1,5 @@
+D:\Project\CSharp-Library\NatLib\NatLib.Debug\bin\Debug\NatLib.Debug.dll
+D:\Project\CSharp-Library\NatLib\NatLib.Debug\bin\Debug\NatLib.Debug.pdb
+D:\Project\CSharp-Library\NatLib\NatLib.Debug\obj\Debug\NatLib.Debug.csprojResolveAssemblyReference.cache
+D:\Project\CSharp-Library\NatLib\NatLib.Debug\obj\Debug\NatLib.Debug.dll
+D:\Project\CSharp-Library\NatLib\NatLib.Debug\obj\Debug\NatLib.Debug.pdb
