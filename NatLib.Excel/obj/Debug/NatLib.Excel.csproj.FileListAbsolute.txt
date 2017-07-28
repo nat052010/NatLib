@@ -1,0 +1,14 @@
+D:\Project\NatLib\NatLib.Excel\bin\Debug\NatLib.Excel.dll
+D:\Project\NatLib\NatLib.Excel\bin\Debug\NatLib.Excel.pdb
+D:\Project\NatLib\NatLib.Excel\bin\Debug\NatLib.dll
+D:\Project\NatLib\NatLib.Excel\bin\Debug\NatLib.pdb
+D:\Project\NatLib\NatLib.Excel\obj\Debug\NatLib.Excel.csprojResolveAssemblyReference.cache
+D:\Project\NatLib\NatLib.Excel\obj\Debug\NatLib.Excel.dll
+D:\Project\NatLib\NatLib.Excel\obj\Debug\NatLib.Excel.pdb
+D:\Project\CSharp-Library\NatLib\NatLib.Excel\bin\Debug\NatLib.Excel.dll
+D:\Project\CSharp-Library\NatLib\NatLib.Excel\bin\Debug\NatLib.Excel.pdb
+D:\Project\CSharp-Library\NatLib\NatLib.Excel\bin\Debug\NatLib.dll
+D:\Project\CSharp-Library\NatLib\NatLib.Excel\bin\Debug\NatLib.pdb
+D:\Project\CSharp-Library\NatLib\NatLib.Excel\obj\Debug\NatLib.Excel.csprojResolveAssemblyReference.cache
+D:\Project\CSharp-Library\NatLib\NatLib.Excel\obj\Debug\NatLib.Excel.dll
+D:\Project\CSharp-Library\NatLib\NatLib.Excel\obj\Debug\NatLib.Excel.pdb
