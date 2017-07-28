@@ -1,0 +1,5 @@
+D:\Project\CSharp-Library\NatLib\NatLib.Thumbnailer\bin\Debug\ffmpeg.exe
+D:\Project\CSharp-Library\NatLib\NatLib.Thumbnailer\bin\Debug\NatLib.Thumbnailer.dll
+D:\Project\CSharp-Library\NatLib\NatLib.Thumbnailer\bin\Debug\NatLib.Thumbnailer.pdb
+D:\Project\CSharp-Library\NatLib\NatLib.Thumbnailer\obj\Debug\NatLib.Thumbnailer.dll
+D:\Project\CSharp-Library\NatLib\NatLib.Thumbnailer\obj\Debug\NatLib.Thumbnailer.pdb
