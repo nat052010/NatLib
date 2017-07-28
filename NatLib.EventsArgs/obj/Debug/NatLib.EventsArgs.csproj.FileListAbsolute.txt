@@ -1,0 +1,5 @@
+D:\Project\CSharp-Library\NatLib\NatLib.EventsArgs\bin\Debug\NatLib.EventsArgs.dll
+D:\Project\CSharp-Library\NatLib\NatLib.EventsArgs\bin\Debug\NatLib.EventsArgs.pdb
+D:\Project\CSharp-Library\NatLib\NatLib.EventsArgs\obj\Debug\NatLib.EventsArgs.csprojResolveAssemblyReference.cache
+D:\Project\CSharp-Library\NatLib\NatLib.EventsArgs\obj\Debug\NatLib.EventsArgs.dll
+D:\Project\CSharp-Library\NatLib\NatLib.EventsArgs\obj\Debug\NatLib.EventsArgs.pdb
