@@ -1,0 +1,11 @@
+D:\Project\CSharp-Library\NatLib\NatLib.Web\bin\Debug\NatLib.Web.dll.config
+D:\Project\CSharp-Library\NatLib\NatLib.Web\bin\Debug\NatLib.Web.dll
+D:\Project\CSharp-Library\NatLib\NatLib.Web\bin\Debug\NatLib.Web.pdb
+D:\Project\CSharp-Library\NatLib\NatLib.Web\bin\Debug\Newtonsoft.Json.dll
+D:\Project\CSharp-Library\NatLib\NatLib.Web\bin\Debug\System.Net.Http.dll
+D:\Project\CSharp-Library\NatLib\NatLib.Web\bin\Debug\System.Net.Http.Formatting.dll
+D:\Project\CSharp-Library\NatLib\NatLib.Web\bin\Debug\Newtonsoft.Json.xml
+D:\Project\CSharp-Library\NatLib\NatLib.Web\bin\Debug\System.Net.Http.xml
+D:\Project\CSharp-Library\NatLib\NatLib.Web\obj\Debug\NatLib.Web.csprojResolveAssemblyReference.cache
+D:\Project\CSharp-Library\NatLib\NatLib.Web\obj\Debug\NatLib.Web.dll
+D:\Project\CSharp-Library\NatLib\NatLib.Web\obj\Debug\NatLib.Web.pdb
