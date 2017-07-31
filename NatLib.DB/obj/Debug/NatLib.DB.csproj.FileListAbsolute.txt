@@ -24,3 +24,21 @@ D:\Project\CSharp-Library\NatLib\NatLib.DB\bin\Debug\System.Data.SQLite.xml
 D:\Project\CSharp-Library\NatLib\NatLib.DB\obj\Debug\NatLib.DB.dll
 D:\Project\CSharp-Library\NatLib\NatLib.DB\obj\Debug\NatLib.DB.pdb
 D:\Project\CSharp-Library\NatLib\NatLib.DB\obj\Debug\NatLib.DB.csprojResolveAssemblyReference.cache
+D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Debug\NatLib.DB.dll.config
+D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Debug\NatLib.DB.dll
+D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Debug\NatLib.DB.pdb
+D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Debug\EntityFramework.dll
+D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Debug\EntityFramework.SqlServer.dll
+D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Debug\NatLib.dll
+D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Debug\NatLib.EventsArgs.dll
+D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Debug\System.Data.SQLite.dll
+D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Debug\System.Data.SQLite.EF6.dll
+D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Debug\System.Data.SQLite.Linq.dll
+D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Debug\NatLib.EventsArgs.pdb
+D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Debug\NatLib.pdb
+D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Debug\EntityFramework.xml
+D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Debug\EntityFramework.SqlServer.xml
+D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Debug\System.Data.SQLite.xml
+D:\Project\GitHub Repo\NatLib\NatLib.DB\obj\Debug\NatLib.DB.csprojResolveAssemblyReference.cache
+D:\Project\GitHub Repo\NatLib\NatLib.DB\obj\Debug\NatLib.DB.dll
+D:\Project\GitHub Repo\NatLib\NatLib.DB\obj\Debug\NatLib.DB.pdb

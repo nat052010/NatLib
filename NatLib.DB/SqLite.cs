@@ -17,11 +17,13 @@ namespace NatLib.DB
         public string Location { get; set; }
         public bool Vacuum { get; set; }
         public string Password { get; set; }
+        //public string Folder { get; set; }
 
         public SqLite()
         {
             Vacuum = true;
             Password = ConfigurationManager.AppSettings.Get("SQLitePassword");
+            //Folder = "Db";
             Location = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Db");
         }
 
@@ -56,6 +58,18 @@ namespace NatLib.DB
                 ConString.DataSource = Path.Combine(Location, value);
             }
         }
+
+        public string Folder
+        {
+            get { return Folder; }
+            set
+            {
+                Folder = value;
+                Location = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, value);
+                //ConString.DataSource = Path.Combine(Location, value);
+            }
+        }
+
 
         public SQLiteConnection Connection(SQLiteConnectionStringBuilder conString = null, bool open = true)
         {
