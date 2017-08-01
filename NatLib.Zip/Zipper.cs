@@ -40,17 +40,17 @@ namespace NatLib.Zip
 
         #region Methods
 
-        public void AddFiles(List<string> files, bool isPathRetain = false)
+        public void AddFiles(List<string> files, bool isPathClear = false)
         {
-            if (isPathRetain)
+            if (isPathClear)
                 ZipFile.AddFiles(files, "");
             else
                 ZipFile.AddFiles(files);
         }
 
-        public void AddFile(string file, bool isPathRetain)
+        public void AddFile(string file, bool isPathClear)
         {
-            if (isPathRetain)
+            if (isPathClear)
                 ZipFile.AddFile(file, "");
             else
                 ZipFile.AddFile(file);
@@ -117,8 +117,9 @@ namespace NatLib.Zip
                 }
             }
         }
+        #region public static
         public static PackageFile ZipFiles(IEnumerable<string> fileNames, string outputFile,
-                                string directoryName = null, IEnumerable<string> subDirectories = null)
+                        string directoryName = null, IEnumerable<string> subDirectories = null)
         {
             //string result = null;
             var result = new PackageFile();
@@ -182,8 +183,6 @@ namespace NatLib.Zip
             return result;
         }
 
-
-
         public static string ZipFolder(string folderPath, string zipFile = null)
         {
             string result = null;
@@ -206,8 +205,6 @@ namespace NatLib.Zip
             return result;
         }
 
-
-
         public static void ExtractZipFiles(string zipFilePath, string outputDirectory)
         {
             using (var zip = Ionic.Zip.ZipFile.Read(zipFilePath))
@@ -224,6 +221,34 @@ namespace NatLib.Zip
             }
         }
 
+        public static void AppendFiles(string zipTarget, List<string> files, bool isPathClear)
+        {
+            using (var zip = ZipFile.Read(zipTarget))
+            {
+                if (isPathClear)
+                    zip.AddFiles(files, "");
+                else
+                    zip.AddFiles(files);
+
+                zip.Save();
+            }
+        }
+
+        public static void AppendFile(string zipTarget, string file, bool isPathClear)
+        {
+            using (var zip = ZipFile.Read(zipTarget))
+            {
+                if (isPathClear)
+                    zip.AddFile(file, "");
+                else
+                    zip.AddFile(file);
+
+                zip.Save();
+            }
+        }
+
+
+        #endregion
 
 
         #endregion
