@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -88,9 +89,26 @@ namespace NatLib
             return items;
         }
 
+        public static List<Dictionary<string, object>> JsonItems(this DataRowCollection dRows)
+        {
+            
+            var items = new List<Dictionary<string, object>>();
+            if (dRows.Count > 0){
+                var cols = dRows[0].Table.Columns;
+                foreach (DataRow row in dRows)
+                {
+                    var value = (from DataColumn col in cols select col.ColumnName).ToDictionary(colName => colName, colName => row[colName]);
+                    items.Add(value);
+                }
+            }
+
+            return items;
+        }
+
+
         public static List<Dictionary<string, object>> JsonItems(this DataTable dt)
         {
-            var columnNames = dt.Columns.Cast<DataColumn>()
+/*            var columnNames = dt.Columns.Cast<DataColumn>()
                                  .Select(x => x.ColumnName)
                                  .ToArray();
 
@@ -106,33 +124,14 @@ namespace NatLib
                 items.Add(value);
             }
 
-            return items;
+            return items;*/
+            return dt.Rows.JsonItems();
         }
 
         public static List<List<Dictionary<string, object>>> JsonItems(this DataTableCollection dts)
         {
-            var items = new List<List<Dictionary<string, object>>>();
-            foreach (DataTable dt in dts)
-            {
-                items.Add(dt.JsonItems());
-            }
-            return items;
+            return (from DataTable dt in dts select dt.JsonItems()).ToList();
         }
-
-        public static List<Dictionary<string, object>> JsonItems(this DataRowCollection dRows)
-        {
-            var cols = dRows[0].Table.Columns;
-            var items = new List<Dictionary<string, object>>();
-
-            foreach (DataRow row in dRows)
-            {
-                var value = (from DataColumn col in cols select col.ColumnName).ToDictionary(colName => colName, colName => row[colName]);
-                items.Add(value);
-            }
-
-            return items;
-        }
-
 
         public static bool IsValidImage(this string filename)
         {
@@ -157,6 +156,29 @@ namespace NatLib
                     };
             var ext = Path.GetExtension(file).ToUpper();
             return Array.IndexOf(mediaExtensions, ext) != -1;
+        }
+
+        public static void RunCmd(this string pthurl, bool waitforexit = false)
+        {
+            var cmd = new Process
+            {
+                StartInfo =
+                {
+                    FileName = "cmd.exe",
+                    RedirectStandardInput = true,
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    WindowStyle = ProcessWindowStyle.Hidden
+                }
+            };
+            cmd.Start();
+            cmd.StandardInput.WriteLine("@echo off");
+            cmd.StandardInput.WriteLine(pthurl);
+            cmd.StandardInput.Flush();
+            cmd.StandardInput.Close();
+
+            if (waitforexit)
+                cmd.WaitForExit();
         }
 
     }
