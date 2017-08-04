@@ -60,21 +60,32 @@ namespace Tester
             //var sql = new MsSqlServer();
             try
             {
-                var message = new MailMessage("servicedelivery@intellismartinc.com", "jonathan_lumapas@yahoo.com")
-                {
-                    Body = "This is a test;",
-                    Subject = "Test"
-                };
-                var client = new SmtpClient
-                {
-                    Host = "mail.intellismartinc.com",
-                    EnableSsl = false,   
-                    Port = 587,
-                    UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential("servicedelivery@intellismartinc.com", "service001")
-                };
+                /*
+                                var message = new MailMessage("servicedelivery@intellismartinc.com", "jonathan_lumapas@yahoo.com")
+                                {
+                                    Body = "This is a test;",
+                                    Subject = "Test"
+                                };
+                                var client = new SmtpClient
+                                {
+                                    Host = "mail.intellismartinc.com",
+                                    EnableSsl = false,   
+                                    Port = 587,
+                                    UseDefaultCredentials = false, 
+                                    Credentials = new NetworkCredential("servicedelivery@intellismartinc.com", "service001")
+                                };
 
-                client.Send(message);
+                                client.Send(message);
+                */
+
+                //var sqlLiteLog = new SqLite { DataSource = MapPath("log.db3"), Location = "" };
+                //var logs = sqlLiteLog.SqlExecCommand($"SELECT * FROM tLogs").Tables[0].JsonItems();
+                HttpClientMultipartFormPostAsync();
+
+
+                //if (!res.IsSuccessStatusCode && res.StatusCode == HttpStatusCode.InternalServerError)
+                //    throw new HttpException("Server Error");
+
 
             }
             catch (Exception ex)
@@ -84,7 +95,37 @@ namespace Tester
 
         }
 
-        private async static void Test2()
+        private static void HttpClientMultipartFormPostAsync()
+        {
+            var logs = new List<Dictionary<string, object>> {new Dictionary<string, object> {{"Test", "Result"}}};
+            var content = new MultipartFormDataContent
+            {
+                {new StringContent(JsonConvert.SerializeObject(logs)), "data"},
+                {new StringContent("fdasfdsafdsa"), "test"}
+            };
+
+            var client = new HttpClient();
+            var address = "http://localhost:20063";
+            address = address.Substring(address.Length - 1) == "/" ? address : address + "/";
+            var location = "api/player/SaveLogs";
+            var uri = new Uri(Path.Combine(address, location));
+            var res = client.PostAsync(uri, content).Result;
+        }
+
+        private static void HttpClientPostAsync()
+        {
+            var logs = new List<Dictionary<string, object>>();
+            logs.Add(new Dictionary<string, object> {{"Test", "Result"}});
+            var content = new StringContent(JsonConvert.SerializeObject(logs), Encoding.UTF8, "application/json");
+            var client = new HttpClient();
+            var address = "http://localhost:20063";
+            address = address.Substring(address.Length - 1) == "/" ? address : address + "/";
+            var location = "api/player/SaveLogs";
+            var uri = new Uri(Path.Combine(address, location));
+            var res = client.PostAsync(uri, content).Result;
+        }
+
+        private async static void HttpClientGetAsync()
         {
             var client = new HttpClient();
             var response = await client.GetAsync("http://localhost:20061/api/action/downloadfile?mediaFiles=1,2,3");

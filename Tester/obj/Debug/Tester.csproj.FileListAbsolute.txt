@@ -36,3 +36,30 @@ D:\Project\CSharp-Library\NatLib\Tester\bin\Debug\System.Data.SQLite.xml
 D:\Project\CSharp-Library\NatLib\Tester\obj\Debug\Tester.csprojResolveAssemblyReference.cache
 D:\Project\CSharp-Library\NatLib\Tester\obj\Debug\Tester.exe
 D:\Project\CSharp-Library\NatLib\Tester\obj\Debug\Tester.pdb
+D:\Project\GitHub Repo\NatLib\Tester\obj\Debug\Tester.csprojResolveAssemblyReference.cache
+D:\Project\GitHub Repo\NatLib\Tester\obj\Debug\Tester.exe
+D:\Project\GitHub Repo\NatLib\Tester\obj\Debug\Tester.pdb
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\ffmpeg.exe
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\Tester.exe.config
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\Tester.exe
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\Tester.pdb
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\Microsoft.AspNet.SignalR.Client.dll
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\NatLib.DB.dll
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\NatLib.Debug.dll
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\NatLib.dll
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\NatLib.Thumbnailer.dll
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\NatLib.Zip.dll
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\Newtonsoft.Json.dll
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\NatLib.EventsArgs.dll
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\MySql.Data.dll
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\System.Data.SQLite.dll
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\Ionic.Zip.dll
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\NatLib.DB.pdb
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\NatLib.Debug.pdb
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\NatLib.Thumbnailer.pdb
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\NatLib.Zip.pdb
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\NatLib.pdb
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\Microsoft.AspNet.SignalR.Client.xml
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\Newtonsoft.Json.xml
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\NatLib.EventsArgs.pdb
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\System.Data.SQLite.xml
