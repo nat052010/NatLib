@@ -34,3 +34,4 @@ D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Release\EntityFramework.SqlServer.xm
 D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Release\System.Data.SQLite.xml
 D:\Project\GitHub Repo\NatLib\NatLib.DB\obj\Release\NatLib.DB.dll
 D:\Project\GitHub Repo\NatLib\NatLib.DB\obj\Release\NatLib.DB.pdb
+D:\Project\GitHub Repo\NatLib\NatLib.DB\obj\Release\NatLib.DB.csprojResolveAssemblyReference.cache

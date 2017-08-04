@@ -1,0 +1,6 @@
+D:\Project\GitHub Repo\NatLib\NatLib.Zip\bin\Release\NatLib.Zip.dll
+D:\Project\GitHub Repo\NatLib\NatLib.Zip\bin\Release\NatLib.Zip.pdb
+D:\Project\GitHub Repo\NatLib\NatLib.Zip\bin\Release\Ionic.Zip.dll
+D:\Project\GitHub Repo\NatLib\NatLib.Zip\obj\Release\NatLib.Zip.csprojResolveAssemblyReference.cache
+D:\Project\GitHub Repo\NatLib\NatLib.Zip\obj\Release\NatLib.Zip.dll
+D:\Project\GitHub Repo\NatLib\NatLib.Zip\obj\Release\NatLib.Zip.pdb

@@ -80,12 +80,13 @@ namespace Tester
 
                 //var sqlLiteLog = new SqLite { DataSource = MapPath("log.db3"), Location = "" };
                 //var logs = sqlLiteLog.SqlExecCommand($"SELECT * FROM tLogs").Tables[0].JsonItems();
-                HttpClientMultipartFormPostAsync();
-
-
+                //HttpClientMultipartFormPostAsync();
                 //if (!res.IsSuccessStatusCode && res.StatusCode == HttpStatusCode.InternalServerError)
                 //    throw new HttpException("Server Error");
-
+                var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                var zipFile = Path.Combine(baseDirectory, "setup1.zip");
+                var fileToAdd = Path.Combine(baseDirectory, "output1.webm");
+                Zipper.AppendFile(zipFile, fileToAdd, true);
 
             }
             catch (Exception ex)
