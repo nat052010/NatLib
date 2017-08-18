@@ -232,7 +232,7 @@ namespace NatLib.DB
             }
         }
 
-        public DataSet SqlExecCommand(string command)
+        public DataSet SqlExecCommand(string command, bool withPrimary = true)
         {
             var dataSet = new DataSet();
             using (var con = Connection())
@@ -242,9 +242,11 @@ namespace NatLib.DB
                 com.CommandText = command;
                 var adapter = new SqlDataAdapter
                 {
-                    SelectCommand = com,
-                    MissingSchemaAction = MissingSchemaAction.AddWithKey
+                    SelectCommand = com
                 };
+
+                if (withPrimary) adapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+
                 adapter.Fill(dataSet);
                 
                 //if (hasSchema) adapter.FillSchema(dataSet, SchemaType.Source);
@@ -252,7 +254,7 @@ namespace NatLib.DB
             return dataSet;
         }
 
-        public DataSet SqlExecCommand(string command, Dictionary<string, object> param)
+        public DataSet SqlExecCommand(string command, Dictionary<string, object> param, bool withPrimary = true)
         {
             var dataSet = new DataSet();
             using (var con = Connection())
@@ -265,9 +267,11 @@ namespace NatLib.DB
 
                 var adapter = new SqlDataAdapter
                 {
-                    SelectCommand = com,
-                    MissingSchemaAction = MissingSchemaAction.AddWithKey
+                    SelectCommand = com
                 };
+
+                if (withPrimary) adapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+
                 adapter.Fill(dataSet);
 
                 //if (hasSchema) adapter.FillSchema(dataSet, SchemaType.Source);
