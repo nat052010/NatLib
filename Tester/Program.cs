@@ -18,6 +18,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using Microsoft.AspNet.SignalR.Client;
 using NatLib.Zip;
+using NatLib.Web;
 
 //using NatLib.Thumbnailer;
 
@@ -83,17 +84,40 @@ namespace Tester
                 //HttpClientMultipartFormPostAsync();
                 //if (!res.IsSuccessStatusCode && res.StatusCode == HttpStatusCode.InternalServerError)
                 //    throw new HttpException("Server Error");
-                var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                var zipFile = Path.Combine(baseDirectory, "setup1.zip");
-                var fileToAdd = Path.Combine(baseDirectory, "output1.webm");
-                Zipper.AppendFile(zipFile, fileToAdd, true);
-
+                //ZIpperAppendFile();
+                //Zipper.ExtractZipFiles(Path.Combine(Directory.GetCurrentDirectory(), "UPD-20170831-15-2.InSysPackage"), Directory.GetCurrentDirectory());
+                GeneratateRss();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
 
+        }
+
+        private static void GeneratateRss()
+        {
+            var rss = new Rss
+            {
+                Style =
+                {
+                    IsFlowVertical = true,
+                    Width = 500,
+                    DescriptionWidth = 400,
+                    Height = 750,
+                    DescriptionHeight = 300,
+                    DescriptionLines = 12
+                }
+            };
+            var rssHtml = rss.ParseFeed("https://news.google.com/news/rss/?ned=en_ph&hl=en");
+        }
+
+        private static void ZIpperAppendFile()
+        {
+            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            var zipFile = Path.Combine(baseDirectory, "setup1.zip");
+            var fileToAdd = Path.Combine(baseDirectory, "output1.webm");
+            Zipper.AppendFile(zipFile, fileToAdd, true);
         }
 
         private static void HttpClientMultipartFormPostAsync()

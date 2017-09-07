@@ -75,6 +75,10 @@
       <Project>{055ee1ff-c96d-49e1-abc1-7abe3a44e8db}</Project>
       <Name>NatLib.Thumbnailer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NatLib.Web\NatLib.Web.csproj">
+      <Project>{603fb013-d938-4f93-b8d5-9a2b0ac31ae6}</Project>
+      <Name>NatLib.Web</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NatLib.Zip\NatLib.Zip.csproj">
       <Project>{4119fde3-9f7b-4b89-b452-2ef60a66ec94}</Project>
       <Name>NatLib.Zip</Name>

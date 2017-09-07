@@ -9,3 +9,14 @@ D:\Project\CSharp-Library\NatLib\NatLib.Web\bin\Debug\System.Net.Http.xml
 D:\Project\CSharp-Library\NatLib\NatLib.Web\obj\Debug\NatLib.Web.csprojResolveAssemblyReference.cache
 D:\Project\CSharp-Library\NatLib\NatLib.Web\obj\Debug\NatLib.Web.dll
 D:\Project\CSharp-Library\NatLib\NatLib.Web\obj\Debug\NatLib.Web.pdb
+D:\Project\GitHub Repo\NatLib\NatLib.Web\bin\Debug\NatLib.Web.dll.config
+D:\Project\GitHub Repo\NatLib\NatLib.Web\bin\Debug\NatLib.Web.dll
+D:\Project\GitHub Repo\NatLib\NatLib.Web\bin\Debug\NatLib.Web.pdb
+D:\Project\GitHub Repo\NatLib\NatLib.Web\bin\Debug\Newtonsoft.Json.dll
+D:\Project\GitHub Repo\NatLib\NatLib.Web\bin\Debug\System.Net.Http.dll
+D:\Project\GitHub Repo\NatLib\NatLib.Web\bin\Debug\System.Net.Http.Formatting.dll
+D:\Project\GitHub Repo\NatLib\NatLib.Web\bin\Debug\Newtonsoft.Json.xml
+D:\Project\GitHub Repo\NatLib\NatLib.Web\bin\Debug\System.Net.Http.xml
+D:\Project\GitHub Repo\NatLib\NatLib.Web\obj\Debug\NatLib.Web.csprojResolveAssemblyReference.cache
+D:\Project\GitHub Repo\NatLib\NatLib.Web\obj\Debug\NatLib.Web.dll
+D:\Project\GitHub Repo\NatLib\NatLib.Web\obj\Debug\NatLib.Web.pdb
