@@ -101,10 +101,10 @@ namespace Tester
             {
                 Style =
                 {
-                    IsFlowVertical = true,
-                    Width = 500,
+                    IsFlowVertical = false,
+                    Width = 1000,
                     DescriptionWidth = 400,
-                    Height = 750,
+                    Height = 300,
                     DescriptionHeight = 300,
                     DescriptionLines = 12
                 }
