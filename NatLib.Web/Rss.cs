@@ -33,6 +33,7 @@ namespace NatLib.Web
             style.DescriptionLines = 10;
             style.DescriptionWidth = 200;
             style.DescriptionHeight = 300;
+            style.Border = "none";
         }
 
         public string ParseFeed(string feed)
@@ -85,7 +86,7 @@ namespace NatLib.Web
         {
             var str = new StringBuilder();
             str.Append("<style>");
-            str.Append("div.rss-item { width: " + Style.Width + "px; height: " + Style.Height + "px;}");
+            str.Append("div.rss-item { width: " + Style.Width + "px; height: " + Style.Height + "px; border: " + Style.Border + ";}");
             str.Append("div.item-body { overflow: " + Style.OverFlow + "; width: 100%; height: 100% }");
 
             var itemListHeight = Style.IsFlowVertical ? "200vh" : Style.DescriptionLines.ToString() + "em";
@@ -120,6 +121,7 @@ namespace NatLib.Web
         public string OverFlow { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }        
+        public string Border { get; set; }
         public string Transition { get; set; }
         public string DescriptionColor { get; set; }
         public string LinkColor { get; set; }
