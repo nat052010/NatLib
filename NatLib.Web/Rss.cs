@@ -34,6 +34,7 @@ namespace NatLib.Web
             style.DescriptionWidth = 200;
             style.DescriptionHeight = 300;
             style.Border = "none";
+            style.IsDetailShow = true;
         }
 
         public string ParseFeed(string feed)
@@ -67,8 +68,9 @@ namespace NatLib.Web
 
                     //var filterTitle = Style.LinkDisable ? title : $"<a href='{link}'>{title}</a>";
                     var filterTitle = $"<a href='{link}'>{title}</a>";
+                    
+                    var item = $"<div class='item'><div class='title'>{filterTitle}</div>{(Style.IsDetailShow ? $"<div class='description'>{description}</div>": "")}</div>";
 
-                    var item = $"<div class='item'><div class='title'>{filterTitle}</div><div class='description'>{description}</div></div>";
 
                     rssContent.Append(item);
                 }
@@ -119,20 +121,21 @@ namespace NatLib.Web
     public class RssStyle
     {
         public string OverFlow { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }        
+        public double Width { get; set; }
+        public double Height { get; set; }        
         public string Border { get; set; }
         public string Transition { get; set; }
         public string DescriptionColor { get; set; }
         public string LinkColor { get; set; }
         public bool LinkDisable { get; set; }
-        public int DescriptionWidth { get; set; }
-        public int DescriptionHeight { get; set; }
+        public double DescriptionWidth { get; set; }
+        public double DescriptionHeight { get; set; }
         public int DescriptionLines { get; set; }
         public string TitleFontSize { get; set; }
         public string TitleFontWeight { get; set; }
         public bool IsFlowVertical { get; set; }
         public bool HasLineSeparatorBorder { get; set; }
         public string LineSeparatorBorder { get; set; }
+        public bool IsDetailShow { get; set; }
     }
 }

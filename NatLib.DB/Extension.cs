@@ -116,7 +116,7 @@ namespace NatLib.DB
             var values = new List<string>();
             foreach (DataColumn col in dRow.Table.Columns)
             {
-                var val = Convert.ToString(dRow[col.ColumnName]);
+                var val = Convert.ToString(dRow[col.ColumnName]).ToSqlCharacter();
                 var type = col.DataType.Name.SqLiteDataType();
 
                 if (dRow[col.ColumnName] == DBNull.Value)
