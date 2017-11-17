@@ -1,0 +1,6 @@
+D:\Project\GitHub Repo\NatLib\NatLib\bin\Release\NatLib.dll
+D:\Project\GitHub Repo\NatLib\NatLib\bin\Release\NatLib.pdb
+D:\Project\GitHub Repo\NatLib\NatLib\bin\Release\stdole.dll
+D:\Project\GitHub Repo\NatLib\NatLib\obj\Release\NatLib.csprojResolveAssemblyReference.cache
+D:\Project\GitHub Repo\NatLib\NatLib\obj\Release\NatLib.dll
+D:\Project\GitHub Repo\NatLib\NatLib\obj\Release\NatLib.pdb

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Net;
 
 namespace NatLib.Report
 {
@@ -16,16 +17,20 @@ namespace NatLib.Report
     {
         //Fields
         private bool _disposed = false;
+        private string _mediaType = "pdf";
+        private ExportFormatType _exportFormatType = ExportFormatType.PortableDocFormat;
+
 
         //Properties
         public string Data { get; set; }
         public string FileName { get; set; }
         public Dictionary<string, object> Parameters { get; set; }
         public DbConString ConString { get; set; }
-        protected ReportDocument Document { get; set; }
+        public ReportDocument Document { get; set; }
         public bool DeleteTempReport { get; set; }
         public string ReportPath { get; set; }
         protected bool DbConnectionReady { get; set; } = false;
+        //public DbConString DbConString { get; set; }
 
         //Constructor
         public Crystal(bool deleteTempReport = false)
@@ -42,8 +47,10 @@ namespace NatLib.Report
         }
 
         //Methods
-        public void SetDatabase(DbConString db)
+        private void SetDatabase()
         {
+            var db = ConString;
+            if (db == null) return;
             try
             {
                 Document.SetDatabaseLogon(db.UserId, db.Password, db.Database, db.DataSource);
@@ -56,12 +63,29 @@ namespace NatLib.Report
             }
         }
 
+        public void SetExportFormat(ExportFormatType format )
+        {
+            switch (format)
+            {
+                case ExportFormatType.PortableDocFormat:
+                    _mediaType = "pdf";
+                    break;
+                case ExportFormatType.Excel:
+                    _mediaType = "vnd.ms-excel";
+                    break;
+            }
+
+            _exportFormatType = format;
+        }
+
         private void PreLoad()
         {
-            if (!File.Exists(FileName)) throw new Exception("Cannot find the Report File");
-            ReportPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-            File.Copy(FileName, ReportPath);
+            var fn = FileName;
+            if (!File.Exists(fn)) throw new Exception("Cannot find the Report File");
+            ReportPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + Path.GetExtension(fn));
+            File.Copy(fn, ReportPath);
             Document.Load(ReportPath);
+            SetDatabase();
 
             if (Document.Subreports.Count > 0 && DbConnectionReady)
                 throw new Exception("Database Connection must be set first");
@@ -69,20 +93,24 @@ namespace NatLib.Report
             foreach (var dsc in from ReportDocument ireport in Document.Subreports from IConnectionInfo dsc in ireport.DataSourceConnections select dsc)
                 dsc.SetConnection(ConString.DataSource, ConString.Database, ConString.UserId, ConString.Password);
 
-            foreach (var param in Parameters)
-                Document.SetParameterValue(param.Key, param.Value);
+            if (Parameters != null)
+            {
+                foreach (var param in Parameters)
+                    Document.SetParameterValue(param.Key, param.Value);
+            }
         }
 
         private void PostLoad()
         {
+/*
             using (var ms = new MemoryStream())
             {
                 try
                 {
-                    Document.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                    Document.ExportToStream(_exportFormatType);
                     ms.Position = 0;
                     var buffer = ms.ToArray();                    
-                    Data = $"data:application/pdf;base64,{Convert.ToBase64String(buffer)}";
+                    Data = $"data:application/{_mediaType};base64,{Convert.ToBase64String(buffer)}";
                 }
                 catch (Exception ex)
                 {
@@ -90,6 +118,30 @@ namespace NatLib.Report
                     throw;
                 }
             }
+*/
+
+            using (var stream = Document.ExportToStream(_exportFormatType))
+            {
+                try
+                {
+                    var buffer = new byte[stream.Length];
+                    stream.Read(buffer, 0, Convert.ToInt32(stream.Length - 1));
+                    Data = $"data:application/{_mediaType};base64,{Convert.ToBase64String(buffer)}";
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.Log();
+                    throw;
+                }
+            }
+        }
+
+        public void ExportToDisk(DataTable dt, ExportFormatType format, string fileName, Action<ReportDocument> rptDoc = null)
+        {
+            PreLoad();
+            Document.SetDataSource(dt);
+            rptDoc?.Invoke(Document);
+            Document.ExportToDisk(format, fileName);
         }
 
         public void Load(DataTable dataSource, Action<ReportDocument> rptDoc = null)

@@ -1,0 +1,6 @@
+D:\Project\GitHub Repo\NatLib\NatLib.Thumbnailer\bin\Release\ffmpeg.exe
+D:\Project\GitHub Repo\NatLib\NatLib.Thumbnailer\bin\Release\NatLib.Thumbnailer.dll
+D:\Project\GitHub Repo\NatLib\NatLib.Thumbnailer\bin\Release\NatLib.Thumbnailer.pdb
+D:\Project\GitHub Repo\NatLib\NatLib.Thumbnailer\obj\Release\NatLib.Thumbnailer.csprojResolveAssemblyReference.cache
+D:\Project\GitHub Repo\NatLib\NatLib.Thumbnailer\obj\Release\NatLib.Thumbnailer.dll
+D:\Project\GitHub Repo\NatLib\NatLib.Thumbnailer\obj\Release\NatLib.Thumbnailer.pdb

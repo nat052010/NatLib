@@ -78,7 +78,7 @@
       <Name>NatLib.EventsArgs</Name>
     </ProjectReference>
     <ProjectReference Include="..\NatLib\NatLib.csproj">
-      <Project>{FFB505F3-BD82-443B-A260-68EEEF271A43}</Project>
+      <Project>{ffb505f3-bd82-443b-a260-68eeef271a43}</Project>
       <Name>NatLib</Name>
     </ProjectReference>
   </ItemGroup>

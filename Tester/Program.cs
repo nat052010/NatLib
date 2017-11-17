@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Text;
@@ -17,8 +18,11 @@ using System.Threading;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using Microsoft.AspNet.SignalR.Client;
+//using Microsoft.Azure;
 using NatLib.Zip;
 using NatLib.Web;
+
+//using Microsoft.WindowsAzure;
 
 //using NatLib.Thumbnailer;
 
@@ -86,13 +90,20 @@ namespace Tester
                 //    throw new HttpException("Server Error");
                 //ZIpperAppendFile();
                 //Zipper.ExtractZipFiles(Path.Combine(Directory.GetCurrentDirectory(), "UPD-20170831-15-2.InSysPackage"), Directory.GetCurrentDirectory());
-                GeneratateRss();
+                //GeneratateRss();
+                CloudGetSetting();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
 
+        }
+
+        private static void CloudGetSetting()
+        {
+            //Microsoft.Azure.CloudConfigurationManager.GetSetting("fdsafsda");
+            ConfigurationManager.AppSettings.Get("");
         }
 
         private static void GeneratateRss()

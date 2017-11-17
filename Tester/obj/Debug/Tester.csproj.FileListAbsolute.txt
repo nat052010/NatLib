@@ -66,3 +66,5 @@ D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\System.Data.SQLite.xml
 D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\NatLib.Web.dll
 D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\System.Net.Http.Formatting.dll
 D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\NatLib.Web.pdb
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\Microsoft.WindowsAzure.Configuration.dll
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\Microsoft.WindowsAzure.Configuration.xml

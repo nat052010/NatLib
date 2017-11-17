@@ -88,7 +88,7 @@ namespace NatLib.DB
         public DataSet SqlExecCommand(string command)
         {
             var dataSet = new DataSet();
-            using (var con = Connection())
+            using (var con = Connection(ConString))
             {
                 var com = con.CreateCommand();
                 com.CommandType = CommandType.Text;
@@ -107,7 +107,7 @@ namespace NatLib.DB
         public DataSet SqlExecCommand(string command, Dictionary<string, object> param)
         {
             var dataSet = new DataSet();
-            using (var con = Connection())
+            using (var con = Connection(ConString))
             {
                 var com = con.CreateCommand();
                 com.CommandType = CommandType.StoredProcedure;
@@ -129,7 +129,7 @@ namespace NatLib.DB
         public void SqlNoRetCommand(string command)
         {
             var dataTable = new DataTable();
-            using (var con = Connection())
+            using (var con = Connection(ConString))
             {
                 var comm = con.CreateCommand();
                 comm.CommandType = CommandType.Text;
@@ -141,7 +141,7 @@ namespace NatLib.DB
         public object SqlScalarCommand(string command)
         {
             object result;
-            using (var con = Connection())
+            using (var con = Connection(ConString))
             {
                 var comm = con.CreateCommand();
                 comm.CommandType = CommandType.Text;

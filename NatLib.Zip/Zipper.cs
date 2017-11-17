@@ -119,7 +119,9 @@ namespace NatLib.Zip
         }
         #region public static
         public static PackageFile ZipFiles(IEnumerable<string> fileNames, string outputFile,
-                        string directoryName = null, IEnumerable<string> subDirectories = null)
+                        string directoryName = null, 
+                        IEnumerable<string> subDirectories = null,
+                        IEnumerable<string> outputFileName = null)
         {
             //string result = null;
             var result = new PackageFile();
@@ -131,6 +133,7 @@ namespace NatLib.Zip
                 using (var zip = new ZipFile())
                 {
                     var files = fileNames.ToList();
+                    var outputFiles = outputFileName?.ToList();
                     var subDir = subDirectories?.ToList();
                     var fileCounter = 0;
                     var isSubApply = false;
@@ -153,6 +156,9 @@ namespace NatLib.Zip
                     {
                         var file = files[i];
                         var fileName = Path.GetFileName(file);
+
+                        if (outputFiles != null)
+                            fileName = outputFiles[i];
 
                         var fileCopy = Path.Combine(copyLocation, (isSubApply ? subDir[i] : "") ?? "", fileName);
 

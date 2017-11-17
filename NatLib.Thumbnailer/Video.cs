@@ -42,7 +42,8 @@ namespace NatLib.Thumbnailer
         {
             _input = input;
 
-            CurrentDirectory = HostingEnvironment.IsHosted ? HttpContext.Current.Server.MapPath("~") : Path.GetDirectoryName(_input);
+            //CurrentDirectory = HostingEnvironment.IsHosted ? HttpContext.Current.Server.MapPath("~") : Path.GetDirectoryName(_input);
+            CurrentDirectory = HostingEnvironment.IsHosted ? HttpContext.Current.Server.MapPath("~") : Directory.GetCurrentDirectory();
             OutputDirectory = Path.Combine(CurrentDirectory, "thumbnails");
             FfmpegLocation = Path.Combine(CurrentDirectory, "ffmpeg.exe");
 
@@ -76,21 +77,15 @@ namespace NatLib.Thumbnailer
                 //Arguments = ffmpegArgs
             };
 
-            
-
-
             Process = new Process
             {
                 StartInfo = ProcessStartInfo                
             };
 
-
-
             //var output = new StringBuilder();
             //var error = new StringBuilder();
             var output = new List<string>();
             var error = new List<string>();
-
 
             using (AutoResetEvent outputWaitHandle = new AutoResetEvent(false))
             using (AutoResetEvent errorWaitHandle = new AutoResetEvent(false))
@@ -157,6 +152,76 @@ namespace NatLib.Thumbnailer
                 }
             }
 
+        }
+
+        public void Start(string outputFile = "")
+        {
+            _output = outputFile == "" ? Path.Combine(OutputDirectory, FileName) : outputFile;
+
+            var ffmpegArgs = $"-i {_input} -ss {StartTime}  -s {Size}  -t {OutputLength} -r {FrameRate} -an {_output}";
+
+            ProcessStartInfo = new ProcessStartInfo
+            {
+                FileName = FfmpegLocation, 
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                WindowStyle = ProcessWindowStyle.Hidden,
+                Arguments = ffmpegArgs
+            };
+
+            Process = new Process
+            {
+                StartInfo = ProcessStartInfo
+            };
+
+            var output = new List<string>();
+            var error = new List<string>();
+
+            using (AutoResetEvent outputWaitHandle = new AutoResetEvent(false))
+            using (AutoResetEvent errorWaitHandle = new AutoResetEvent(false))
+            {
+                DataReceivedEventHandler processOnOutputDataReceived = (sender, e) =>
+                {
+                    if (e.Data == null)
+                        outputWaitHandle.Set();
+                    else
+                        output.Add(e.Data);
+                };
+
+                DataReceivedEventHandler processOnErrorDataReceived = (sender, e) =>
+                {
+                    if (e.Data == null)
+                        errorWaitHandle.Set();
+                    else
+                        error.Add(e.Data);
+                };
+
+                Process.OutputDataReceived += processOnOutputDataReceived;
+                Process.ErrorDataReceived += processOnErrorDataReceived;
+
+                Process.Start();
+
+                Process.BeginOutputReadLine();
+                Process.BeginErrorReadLine();
+                var timeout = 50000; //5000
+
+                if (Process.WaitForExit(timeout) &&
+                    outputWaitHandle.WaitOne(timeout) &&
+                    errorWaitHandle.WaitOne(timeout))
+                {
+                    // Process completed. Check process.ExitCode here.
+                    if (error.Any(r => r.Contains("Output file is empty")))
+                    {
+                        throw new Exception("Thumbnail did not created successfully.");
+                    }
+                }
+                else
+                {
+                    // Timed out.
+                }
+            }
         }
 
         /*
