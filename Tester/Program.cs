@@ -11,16 +11,26 @@ using NatLib.DB;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
+using System.Management;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Net.Http.Formatting;
 using System.Net.Mail;
 using System.Threading;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Client;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
 //using Microsoft.Azure;
 using NatLib.Zip;
 using NatLib.Web;
+using Ionic.Zip;
+
+
 
 //using Microsoft.WindowsAzure;
 
@@ -91,13 +101,84 @@ namespace Tester
                 //ZIpperAppendFile();
                 //Zipper.ExtractZipFiles(Path.Combine(Directory.GetCurrentDirectory(), "UPD-20170831-15-2.InSysPackage"), Directory.GetCurrentDirectory());
                 //GeneratateRss();
-                CloudGetSetting();
+                //CloudGetSetting();
+                //HttpClientGetAsync();
+                //DownloadBlob();
+                //TestDownloadZipFile();
+                //ZipFiles();
+
+                var mbInfo = GetBoardSerial();
+
+                Console.WriteLine($"Board SErial: {mbInfo}");
+                Console.ReadLine();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
 
+        }
+
+        private static string GetBoardSerial()
+        {
+            var mbInfo = "";
+            var mc = new ManagementClass("win32_baseboard");
+            var moc = mc.GetInstances();
+
+            foreach (var mo in moc)
+            {
+                var prop = mo.Properties;
+                mbInfo = prop["serialnumber"].Value.ToString();
+                break;
+            }
+            return mbInfo;
+        }
+
+        private static void ZipFiles()
+        {
+            var files = new List<string>
+            {
+                "4b8262c7-4121-46a6-949d-5888ffa4516c.mp4",
+                "ffmpeg.exe"
+            };
+            var zip = Guid.NewGuid().ToString() + ".zip";
+            var dir = Directory.GetCurrentDirectory();
+            Zipper.ZipFiles(files, Path.Combine(dir, zip), dir);
+        }
+
+        private  static void DownloadBlob(string fileName)
+        {
+            var account = CloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=digitalcms;AccountKey=luMUU4kAvZfNWy+ZTxBkPLt5DSGSGPnvV64GRfkm5yyscl00Msswzbmm+bAK8S6b+ubD9uZnP3J4VwppcNK8uA==;EndpointSuffix=core.windows.net");
+            var client = account.CreateCloudBlobClient();
+            var con = client.GetContainerReference("content");
+            con.CreateIfNotExists(BlobContainerPublicAccessType.Blob);
+            var dir = con.GetDirectoryReference("Zip/");
+            //var fileName = "4b8262c7-4121-46a6-949d-5888ffa4516c.mp4";
+            var block = dir.GetBlockBlobReference(fileName);
+
+/*
+            var stream = new MemoryStream();
+            await block.DownloadToStreamAsync(stream);
+            stream.Dispose();
+*/
+
+            block.DownloadToFile(Path.Combine(Directory.GetCurrentDirectory(), fileName), FileMode.CreateNew);
+        }
+
+
+        public static void CopyBlob(CloudBlockBlob myBlob, string name)
+        {
+            var root = ConfigurationManager.AppSettings.Get("AzureWebJobsScriptRoot");
+            var dir = myBlob.Parent.Prefix;
+            var newName = myBlob.Name.Replace(dir, "");
+            var folder = Path.Combine(root, "content", dir.Replace('/', '\\'));
+            if (!Directory.Exists(folder))
+                Directory.CreateDirectory(folder);
+
+            var content = Path.Combine(folder, newName);
+
+            if (content.IndexOf("thumbnails") != -1)
+                myBlob.DownloadToFile(content, FileMode.CreateNew);
         }
 
         private static void CloudGetSetting()
@@ -134,6 +215,7 @@ namespace Tester
         private static void HttpClientMultipartFormPostAsync()
         {
             var logs = new List<Dictionary<string, object>> {new Dictionary<string, object> {{"Test", "Result"}}};
+            
             var content = new MultipartFormDataContent
             {
                 {new StringContent(JsonConvert.SerializeObject(logs)), "data"},
@@ -163,25 +245,177 @@ namespace Tester
 
         private async static void HttpClientGetAsync()
         {
-            var client = new HttpClient();
-            var response = await client.GetAsync("http://localhost:20061/api/action/downloadfile?mediaFiles=1,2,3");
-            var file = response.Content.Headers.ContentDisposition?.FileName ?? Guid.NewGuid().ToString() + ".zip";
-
-            if (!response.IsSuccessStatusCode)
+            try
             {
-                Console.WriteLine("Error Occur");
-                return;
+                var client = new HttpClient();
+                var response = await client.GetAsync("https://digitalcms.blob.core.windows.net/content/MediaFiles/Content/4b8262c7-4121-46a6-949d-5888ffa4516c.mp4");
+                var file = response.Content.Headers.ContentDisposition?.FileName ?? Guid.NewGuid().ToString() + ".mp4";
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Error Occur");
+                    return;
+                }
+                var result = await response.Content.ReadAsStreamAsync();
+
+                var dir = Directory.GetCurrentDirectory();
+                var zipFile = Path.Combine(dir, file);
+                var stream = File.Create(zipFile);
+
+                result.CopyTo(stream);
+
+                stream.Dispose();
+
             }
-            var result = await response.Content.ReadAsStreamAsync();
+            catch (Exception ex)
+            {
 
-            var dir = Directory.GetCurrentDirectory();
-            var zipFile = Path.Combine(dir, file);
-            var stream = File.Create(zipFile);
-
-            result.CopyTo(stream);
-
-            stream.Dispose();
+                Console.WriteLine(ex.Message);
+            }
         }
+
+        public static async Task<HttpResponseMessage> Run(HttpRequestMessage req)
+        {
+            var res = req.CreateResponse();
+
+            var response = new HttpRMessageWCleaner
+            {
+                RequestMessage = res.RequestMessage,
+                StatusCode = res.StatusCode,
+                Version = res.Version,
+                Content = res.Content
+            };
+
+            //var payload = await req.Content.ReadAsFormDataAsync();
+            var content = await req.Content.ReadAsMultipartAsync();
+            var payload = content.Contents;
+
+
+            Func<string, string> get = ConfigurationManager.AppSettings.Get;
+            var root = get("AzureWebJobsScriptRoot");                
+            var fileVal = await payload[0].ReadAsStringAsync();
+            if (!string.IsNullOrEmpty(fileVal))
+            {
+                var files = JsonConvert.DeserializeObject<List<string>>(fileVal);
+                var zip = await payload[1].ReadAsStringAsync();
+                var folder = await payload[2].ReadAsStringAsync();
+                var dir = Path.Combine(root, "content", folder);
+                var outputFile = Path.Combine(dir, zip);
+
+                var conString = get("AzureWebJobsStorage") + ";EndpointSuffix=core.windows.net";
+                var blobAccount = CloudStorageAccount.Parse(conString);
+                var client = blobAccount.CreateCloudBlobClient();
+                var con = client.GetContainerReference("content");
+                con.CreateIfNotExists(BlobContainerPublicAccessType.Blob);
+                var blobDir = con.GetDirectoryReference("Zip/");
+                var block = blobDir.GetBlockBlobReference(zip);
+
+
+
+                //Zipper.ZipFiles(files, outputFile, dir);
+                var newFile = files.Select(r => Path.Combine(dir, r));
+                using (var z = new ZipFile())
+                {
+                    z.AddFiles(newFile);
+                    z.Save(outputFile);
+                }
+
+                
+                
+                //block.UploadFromFile(outputFile, AccessCondition.GenerateEmptyCondition());
+                var stream = File.Open(outputFile, FileMode.Open);
+                block.UploadFromStream(stream);
+
+
+                response.FileToClean.Add(outputFile);
+                response.Content = new StringContent(zip);
+
+
+
+
+                //CreateResponseContent(outputFile, response);
+            }
+            return response;
+        }
+
+        private static void CreateResponseContent(string filePath, HttpRMessageWCleaner response)
+        {
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    var file = new FileStream(filePath, FileMode.Open);
+                    var content = new StreamContent(file);
+                    response.Content = content;
+                    var info = new FileInfo(filePath);
+                    response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+                    {
+                        FileName = Path.GetFileName(filePath),
+                        Size = info.Length,
+                        CreationDate = DateTime.Now.ToLocalTime()
+                    };
+
+                    response.FileToClean.Add(filePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private static void TestDownloadZipFile()
+        {
+            var files = new List<string>
+            {
+                "001 Welcome.mp4",
+                "002 What you should know before watching.mp4",
+/*
+                "032 Use the diff tool to compare folders.mp4",
+                "009 Principles of source control.mp4"
+*/
+            };
+
+            var zip = Guid.NewGuid().ToString() + ".zip";
+
+            var content = new MultipartFormDataContent
+                    {
+                        {new StringContent(JsonConvert.SerializeObject(files), Encoding.UTF8, "application/json"), "files"},
+                        {new StringContent(zip), "zip"},
+                        {new StringContent("MediaFiles\\Content"), "folder" }
+                    };
+
+            var client = new HttpClient
+            {
+                Timeout = TimeSpan.FromMilliseconds(600000)
+            };
+            var timer = new Stopwatch();
+            timer.Start();
+            
+            var res = client.PostAsync(new Uri("https://digitalsignagecms.azurewebsites.net/api/ZipFile?code=kjvaeGC0pJWltJtXuyKFZI6mXPILA32awa3pBFvzv3fW1B17IL8CwQ=="), content).Result;
+
+            if (res.IsSuccessStatusCode)
+            {
+                var result = res.Content.ReadAsStreamAsync().Result;
+                using (var stream = File.Create(Path.Combine(Directory.GetCurrentDirectory(), zip)))
+                    result.CopyTo(stream);
+
+
+                //var result = res.Content.ReadAsStringAsync().Result;
+                //DownloadBlob(zip);
+
+
+                timer.Stop();
+                Console.WriteLine("Time Tick: " + timer.ElapsedMilliseconds);
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("Error");
+            }
+
+        }
+
 
         private static void Watcher_Changed(object sender, FileSystemEventArgs e)
         {

@@ -10,3 +10,5 @@ D:\Project\GitHub Repo\NatLib\NatLib.Zip\bin\Debug\Ionic.Zip.dll
 D:\Project\GitHub Repo\NatLib\NatLib.Zip\obj\Debug\NatLib.Zip.csprojResolveAssemblyReference.cache
 D:\Project\GitHub Repo\NatLib\NatLib.Zip\obj\Debug\NatLib.Zip.dll
 D:\Project\GitHub Repo\NatLib\NatLib.Zip\obj\Debug\NatLib.Zip.pdb
+D:\Project\GitHub Repo\NatLib\NatLib.Zip\bin\Debug\NatLib.dll
+D:\Project\GitHub Repo\NatLib\NatLib.Zip\bin\Debug\NatLib.pdb

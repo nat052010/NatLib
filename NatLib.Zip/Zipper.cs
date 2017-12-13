@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Ionic.Zip;
+using NatLib;
 
 namespace NatLib.Zip
 {
@@ -132,49 +134,59 @@ namespace NatLib.Zip
             {
                 using (var zip = new ZipFile())
                 {
-                    var files = fileNames.ToList();
-                    var outputFiles = outputFileName?.ToList();
-                    var subDir = subDirectories?.ToList();
-                    var fileCounter = 0;
-                    var isSubApply = false;
-
-                    if (subDir != null && subDir.Count() == fileNames.Count())
+                    try
                     {
-                        isSubApply = true;
-                        foreach (var newPath in subDir.Where(r => r != null).Select(sub => Path.Combine(copyLocation, sub)).ToList())
-                            Directory.CreateDirectory(newPath);
-                    }
+                        var files = fileNames.ToList();
+                        var outputFiles = outputFileName?.ToList();
+                        var subDir = subDirectories?.ToList();
+                        var fileCounter = 0;
+                        var isSubApply = false;
 
-                    if (directoryName != null)
+                        if (subDir != null && subDir.Count() == fileNames.Count())
+                        {
+                            isSubApply = true;
+                            foreach (var newPath in subDir.Where(r => r != null).Select(sub => Path.Combine(copyLocation, sub)).ToList())
+                                Directory.CreateDirectory(newPath);
+                        }
+
+                        if (directoryName != null)
+                        {
+                            files.Clear();
+                            files.AddRange(fileNames.Select(
+                                fileName => Path.Combine(directoryName, fileName))
+                                .Where(File.Exists));
+                        }
+                        for (int i = 0; i < files.Count; i++)
+                        {
+                            var file = files[i];
+                            var fileName = Path.GetFileName(file);
+
+                            if (outputFiles != null)
+                                fileName = outputFiles[i];
+
+                            var fileCopy = Path.Combine(copyLocation, (isSubApply ? subDir[i] : "") ?? "", fileName);
+
+                            if (!File.Exists(file)) continue;
+                            File.Copy(file, fileCopy);
+                            fileCounter++;
+                        }
+
+                        if (fileCounter == 0) throw new FileNotFoundException();
+                        result.PackagePath = outputFile;
+                        result.FileList = Directory.GetFiles(copyLocation).ToList();
+                        result.FileCount = fileCounter;
+                        zip.AddDirectory(copyLocation);
+                        
+                        zip.Save(outputFile);
+
+                    }
+                    catch (Exception ex)
                     {
-                        files.Clear();
-                        files.AddRange(fileNames.Select(
-                            fileName => Path.Combine(directoryName, fileName))
-                            .Where(File.Exists));
+                        var lNumber = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                        var s = Convert.ToString(lNumber);
+                        $"Zipper ZipFiles Error: {ex.Message}, Source: {ex.Source}".Log();
+                        throw;
                     }
-                    for (int i = 0; i < files.Count; i++)
-                    {
-                        var file = files[i];
-                        var fileName = Path.GetFileName(file);
-
-                        if (outputFiles != null)
-                            fileName = outputFiles[i];
-
-                        var fileCopy = Path.Combine(copyLocation, (isSubApply ? subDir[i] : "") ?? "", fileName);
-
-                        if (!File.Exists(file)) continue;
-                        File.Copy(file, fileCopy);
-                        fileCounter++;
-                    }
-
-                    if (fileCounter == 0) throw new FileNotFoundException();
-                    result.PackagePath = outputFile;
-                    result.FileList = Directory.GetFiles(copyLocation).ToList();
-                    result.FileCount = fileCounter;
-
-                    zip.AddDirectory(copyLocation);
-                    zip.Save(outputFile);
-
                 }
 
             }
@@ -184,7 +196,7 @@ namespace NatLib.Zip
             }
             finally
             {
-                Directory.Delete(copyLocation, true);
+                //Directory.Delete(copyLocation, true);
             }
             return result;
         }
