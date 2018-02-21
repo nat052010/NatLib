@@ -118,3 +118,5 @@ D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\zh-Hant\System.Spatial.resources.
 D:\Project\GitHub Repo\NatLib\Tester\obj\Debug\Tester.csprojResolveAssemblyReference.cache
 D:\Project\GitHub Repo\NatLib\Tester\obj\Debug\Tester.exe
 D:\Project\GitHub Repo\NatLib\Tester\obj\Debug\Tester.pdb
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\ITIFleetAPI.Client.dll
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\ITIFleetAPI.Client.pdb

@@ -17,6 +17,7 @@ namespace NatLib.DB
         public string Location { get; set; }
         public bool Vacuum { get; set; }
         public string Password { get; set; }
+        public string Name { get; set; }
         //public string Folder { get; set; }
 
         public SqLite()
@@ -80,11 +81,14 @@ namespace NatLib.DB
                 if (!Directory.Exists(Location) && !string.IsNullOrEmpty(Location)) Directory.CreateDirectory(Location);
 
                 if (conString == null)
+                {
+                    var source = Name ?? config("SQLiteDataSource");
                     ConString = new SQLiteConnectionStringBuilder
                     {
-                        DataSource = Path.Combine(Location, (config("SQLiteDataSource") ?? Guid.NewGuid().ToString() + ".db3")),
+                        DataSource = Path.Combine(Location, (source ?? Guid.NewGuid().ToString() + ".db3")),
                         Version = Convert.ToInt32(config("SQLiteVersion") ?? "3")
                     };
+                }
                 else
                 {
                     ConString = conString;

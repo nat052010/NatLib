@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Configuration;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -34,9 +36,16 @@ namespace NatLib
             return string.Join(delimeter, list);
         }
 
-        public static void Log(this string error, string prefix = "Err_", string folder = "Error")
+        public static void Log(this string error, string prefix = "Err_", string folder = "Error", bool useDateFolder = false)
         {
-            var location = HostingEnvironment.IsHosted ? HttpContext.Current.Server.MapPath($"~/{folder}") : Path.Combine(AppDomain.CurrentDomain.BaseDirectory, folder);
+            var isHosted = HostingEnvironment.IsHosted;
+            var location = isHosted ? HttpContext.Current.Server.MapPath($"~/{folder}") : Path.Combine(AppDomain.CurrentDomain.BaseDirectory, folder);
+            var dt = DateTime.Now;
+            if (useDateFolder)
+            {                
+                var df = dt.Year.ToString() + dt.Month.ToString() + dt.Day.ToString();
+                location = isHosted ? $"{location}/{df}" : $"{Path.Combine(location, df)}";
+            }
 
             if (!Directory.Exists(location))
                 Directory.CreateDirectory(location);
@@ -46,7 +55,7 @@ namespace NatLib
 
             using (var file = new StreamWriter(path, true))
             {
-                file.WriteLine(DateTime.Now.ToShortTimeString() + ", " + error);
+                file.WriteLine(dt.ToShortTimeString() + ", " + error);
                 file.AutoFlush = true;
             }
         }
@@ -179,6 +188,11 @@ namespace NatLib
 
             if (waitforexit)
                 cmd.WaitForExit();
+        }
+
+        public static string GetSetting(string item)
+        {           
+            return ConfigurationManager.AppSettings.Get(item);
         }
 
     }

@@ -1,0 +1,4 @@
+D:\Project\GitHub Repo\NatLib\NatLib.EventsArgs\bin\Release\NatLib.EventsArgs.dll
+D:\Project\GitHub Repo\NatLib\NatLib.EventsArgs\bin\Release\NatLib.EventsArgs.pdb
+D:\Project\GitHub Repo\NatLib\NatLib.EventsArgs\obj\Release\NatLib.EventsArgs.dll
+D:\Project\GitHub Repo\NatLib\NatLib.EventsArgs\obj\Release\NatLib.EventsArgs.pdb

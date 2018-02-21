@@ -123,13 +123,15 @@ namespace NatLib.Zip
         public static PackageFile ZipFiles(IEnumerable<string> fileNames, string outputFile,
                         string directoryName = null, 
                         IEnumerable<string> subDirectories = null,
-                        IEnumerable<string> outputFileName = null)
+                        IEnumerable<string> outputFileName = null,
+                        Action<string> todo = null)
         {
             //string result = null;
             var result = new PackageFile();
             var copyLocation = Path.Combine(Path.GetDirectoryName(outputFile), Guid.NewGuid().ToString());
             if (!Directory.Exists(copyLocation))
                 Directory.CreateDirectory(copyLocation);
+
             try
             {
                 using (var zip = new ZipFile())
@@ -145,7 +147,10 @@ namespace NatLib.Zip
                         if (subDir != null && subDir.Count() == fileNames.Count())
                         {
                             isSubApply = true;
-                            foreach (var newPath in subDir.Where(r => r != null).Select(sub => Path.Combine(copyLocation, sub)).ToList())
+                            foreach (
+                                var newPath in
+                                    subDir.Where(r => r != null).Select(sub => Path.Combine(copyLocation, sub)).ToList()
+                                )
                                 Directory.CreateDirectory(newPath);
                         }
 
@@ -167,6 +172,7 @@ namespace NatLib.Zip
                             var fileCopy = Path.Combine(copyLocation, (isSubApply ? subDir[i] : "") ?? "", fileName);
 
                             if (!File.Exists(file)) continue;
+                            todo?.Invoke(fileCopy);
                             File.Copy(file, fileCopy);
                             fileCounter++;
                         }
@@ -176,9 +182,7 @@ namespace NatLib.Zip
                         result.FileList = Directory.GetFiles(copyLocation).ToList();
                         result.FileCount = fileCounter;
                         zip.AddDirectory(copyLocation);
-                        
                         zip.Save(outputFile);
-
                     }
                     catch (Exception ex)
                     {
@@ -186,6 +190,10 @@ namespace NatLib.Zip
                         var s = Convert.ToString(lNumber);
                         $"Zipper ZipFiles Error: {ex.Message}, Source: {ex.Source}".Log();
                         throw;
+                    }
+                    finally
+                    {
+                        Directory.Delete(copyLocation, true);
                     }
                 }
 

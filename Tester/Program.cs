@@ -29,7 +29,7 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using NatLib.Zip;
 using NatLib.Web;
 using Ionic.Zip;
-
+using ITIFleetAPI.Client;
 
 
 //using Microsoft.WindowsAzure;
@@ -107,10 +107,13 @@ namespace Tester
                 //TestDownloadZipFile();
                 //ZipFiles();
 
-                var mbInfo = GetBoardSerial();
+                //var mbInfo = GetBoardSerial();
 
-                Console.WriteLine($"Board SErial: {mbInfo}");
-                Console.ReadLine();
+                //Console.WriteLine($"Board SErial: {mbInfo}");
+                //Console.ReadLine();
+                //HttpClientPostAsync();
+                //Dictionary<string, object> a = "b92d64dbd63190f7, 1, 2".NewLocation("http://localhost:1168/");
+                DownloadBlob("ba95a207-e716-44df-8a84-b52ee7330141.jpg");
             }
             catch (Exception ex)
             {
@@ -148,14 +151,19 @@ namespace Tester
 
         private  static void DownloadBlob(string fileName)
         {
-            var account = CloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=digitalcms;AccountKey=luMUU4kAvZfNWy+ZTxBkPLt5DSGSGPnvV64GRfkm5yyscl00Msswzbmm+bAK8S6b+ubD9uZnP3J4VwppcNK8uA==;EndpointSuffix=core.windows.net");
+            //var account = CloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=digitalcms;AccountKey=luMUU4kAvZfNWy+ZTxBkPLt5DSGSGPnvV64GRfkm5yyscl00Msswzbmm+bAK8S6b+ubD9uZnP3J4VwppcNK8uA==;EndpointSuffix=core.windows.net");
+            var account =
+                CloudStorageAccount.Parse(
+                    "https://digitalcms.blob.core.windows.net/?sv=2017-04-17&ss=bfqt&srt=sco&sp=rwdlacup&se=2018-01-10T00:39:25Z&st=2018-01-09T16:39:25Z&spr=https&sig=i3tlfjhTYxptfS6p1%2FdAkAWWwDv5sabYM%2F045gXKgcM%3D");
             var client = account.CreateCloudBlobClient();
+            
             var con = client.GetContainerReference("content");
             con.CreateIfNotExists(BlobContainerPublicAccessType.Blob);
-            var dir = con.GetDirectoryReference("Zip/");
+            var dir = con.GetDirectoryReference("Files/Client App/");
             //var fileName = "4b8262c7-4121-46a6-949d-5888ffa4516c.mp4";
             var block = dir.GetBlockBlobReference(fileName);
-
+            
+            
 /*
             var stream = new MemoryStream();
             await block.DownloadToStreamAsync(stream);
@@ -232,15 +240,24 @@ namespace Tester
 
         private static void HttpClientPostAsync()
         {
-            var logs = new List<Dictionary<string, object>>();
-            logs.Add(new Dictionary<string, object> {{"Test", "Result"}});
-            var content = new StringContent(JsonConvert.SerializeObject(logs), Encoding.UTF8, "application/json");
-            var client = new HttpClient();
-            var address = "http://localhost:20063";
-            address = address.Substring(address.Length - 1) == "/" ? address : address + "/";
-            var location = "api/player/SaveLogs";
-            var uri = new Uri(Path.Combine(address, location));
-            var res = client.PostAsync(uri, content).Result;
+            try
+            {
+                var logs = new List<Dictionary<string, object>>();
+                logs.Add(new Dictionary<string, object> { { "Test", "Result" } });
+                var content = new StringContent(JsonConvert.SerializeObject(logs), Encoding.UTF8, "application/json");
+                var client = new HttpClient();
+                var address = "http://localhost:1168";
+                address = address.Substring(address.Length - 1) == "/" ? address : address + "/";
+                var location = "api/Database/NewLocation";
+                var uri = new Uri(Path.Combine(address, location));
+                var res = client.PostAsync(uri, content).Result;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         private async static void HttpClientGetAsync()

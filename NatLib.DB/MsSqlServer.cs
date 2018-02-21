@@ -201,6 +201,7 @@ namespace NatLib.DB
             SqlConnectionStringBuilder connectionBuilder;
             Func<string, string> config = ConfigurationManager.AppSettings.Get;
             if (conString == null)
+            {
                 connectionBuilder = new SqlConnectionStringBuilder
                 {
                     DataSource = config("Server"),
@@ -208,6 +209,7 @@ namespace NatLib.DB
                     Password = config("Password"),
                     InitialCatalog = config("Database")
                 };
+            }
             else
                 connectionBuilder = conString;
 
