@@ -77,10 +77,6 @@
       <Project>{e66c2726-d515-48ce-925f-59b6976d4860}</Project>
       <Name>NatLib.EventsArgs</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NatLib\NatLib.csproj">
-      <Project>{ffb505f3-bd82-443b-a260-68eeef271a43}</Project>
-      <Name>NatLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
