@@ -169,9 +169,11 @@ namespace NatLib
 
         public static void RunCmd(this string pthurl, bool waitforexit = false)
         {
-            var cmd = new Process
+            try
             {
-                StartInfo =
+                var cmd = new Process
+                {
+                    StartInfo =
                 {
                     FileName = "cmd.exe",
                     RedirectStandardInput = true,
@@ -179,15 +181,24 @@ namespace NatLib
                     UseShellExecute = false,
                     WindowStyle = ProcessWindowStyle.Hidden
                 }
-            };
-            cmd.Start();
-            cmd.StandardInput.WriteLine("@echo off");
-            cmd.StandardInput.WriteLine(pthurl);
-            cmd.StandardInput.Flush();
-            cmd.StandardInput.Close();
+                };
+                cmd.Start();
+                cmd.StandardInput.WriteLine("@echo off");
+                cmd.StandardInput.WriteLine(pthurl);
+                cmd.StandardInput.Flush();
+                cmd.StandardInput.Close();
 
-            if (waitforexit)
-                cmd.WaitForExit();
+                if (waitforexit)
+                    cmd.WaitForExit();
+            }
+            catch (Exception ex)
+            {
+                ("RunCmd - " + ex.Message).Log();
+            }
+            //finally
+            //{
+            //    ("RunCmd Path - " + pthurl).Log();
+            //}
         }
 
         public static string GetSetting(string item)

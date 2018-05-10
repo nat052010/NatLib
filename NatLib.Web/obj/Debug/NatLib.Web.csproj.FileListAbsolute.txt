@@ -20,3 +20,4 @@ D:\Project\GitHub Repo\NatLib\NatLib.Web\bin\Debug\System.Net.Http.xml
 D:\Project\GitHub Repo\NatLib\NatLib.Web\obj\Debug\NatLib.Web.csprojResolveAssemblyReference.cache
 D:\Project\GitHub Repo\NatLib\NatLib.Web\obj\Debug\NatLib.Web.dll
 D:\Project\GitHub Repo\NatLib\NatLib.Web\obj\Debug\NatLib.Web.pdb
+D:\Project\GitHub Repo\NatLib\NatLib.Web\obj\Debug\NatLib.Web.csproj.CoreCompileInputs.cache

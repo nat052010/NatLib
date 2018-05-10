@@ -50,3 +50,5 @@ D:\Project\GitHub Repo\NatLib\NatLib.Report\bin\Debug\CrystalDecisions.ReportApp
 D:\Project\GitHub Repo\NatLib\NatLib.Report\bin\Debug\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
 D:\Project\GitHub Repo\NatLib\NatLib.Report\bin\Debug\CrystalDecisions.ReportAppServer.ObjectFactory.dll
 D:\Project\GitHub Repo\NatLib\NatLib.Report\bin\Debug\CrystalDecisions.ReportAppServer.CommonControls.dll
+D:\Project\GitHub Repo\NatLib\NatLib.Report\obj\Debug\NatLib.Report.csproj.CoreCompileInputs.cache
+D:\Project\GitHub Repo\NatLib\NatLib.Report\obj\Debug\NatLib.Report.csproj.CopyComplete

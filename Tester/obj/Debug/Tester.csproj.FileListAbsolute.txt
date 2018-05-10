@@ -120,3 +120,8 @@ D:\Project\GitHub Repo\NatLib\Tester\obj\Debug\Tester.exe
 D:\Project\GitHub Repo\NatLib\Tester\obj\Debug\Tester.pdb
 D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\ITIFleetAPI.Client.dll
 D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\ITIFleetAPI.Client.pdb
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\NatLib.DB.dll.config
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\NatLib.Web.dll.config
+D:\Project\GitHub Repo\NatLib\Tester\bin\Debug\System.Data.SQLite.dll.config
+D:\Project\GitHub Repo\NatLib\Tester\obj\Debug\Tester.csproj.CoreCompileInputs.cache
+D:\Project\GitHub Repo\NatLib\Tester\obj\Debug\Tester.csproj.CopyComplete

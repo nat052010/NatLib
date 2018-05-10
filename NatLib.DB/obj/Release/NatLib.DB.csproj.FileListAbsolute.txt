@@ -35,3 +35,6 @@ D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Release\System.Data.SQLite.xml
 D:\Project\GitHub Repo\NatLib\NatLib.DB\obj\Release\NatLib.DB.dll
 D:\Project\GitHub Repo\NatLib\NatLib.DB\obj\Release\NatLib.DB.pdb
 D:\Project\GitHub Repo\NatLib\NatLib.DB\obj\Release\NatLib.DB.csprojResolveAssemblyReference.cache
+D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Release\System.Data.SQLite.dll.config
+D:\Project\GitHub Repo\NatLib\NatLib.DB\obj\Release\NatLib.DB.csproj.CoreCompileInputs.cache
+D:\Project\GitHub Repo\NatLib\NatLib.DB\obj\Release\NatLib.DB.csproj.CopyComplete

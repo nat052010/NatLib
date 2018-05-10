@@ -6,5 +6,6 @@ D:\Project\CSharp-Library\NatLib\NatLib.EventsArgs\obj\Debug\NatLib.EventsArgs.p
 D:\Project\GitHub Repo\NatLib\NatLib.EventsArgs\bin\Debug\NatLib.EventsArgs.dll
 D:\Project\GitHub Repo\NatLib\NatLib.EventsArgs\bin\Debug\NatLib.EventsArgs.pdb
 D:\Project\GitHub Repo\NatLib\NatLib.EventsArgs\obj\Debug\NatLib.EventsArgs.csprojResolveAssemblyReference.cache
+D:\Project\GitHub Repo\NatLib\NatLib.EventsArgs\obj\Debug\NatLib.EventsArgs.csproj.CoreCompileInputs.cache
 D:\Project\GitHub Repo\NatLib\NatLib.EventsArgs\obj\Debug\NatLib.EventsArgs.dll
 D:\Project\GitHub Repo\NatLib\NatLib.EventsArgs\obj\Debug\NatLib.EventsArgs.pdb

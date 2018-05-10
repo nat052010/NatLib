@@ -9,3 +9,4 @@ D:\Project\GitHub Repo\NatLib\NatLib.Thumbnailer\bin\Debug\NatLib.Thumbnailer.pd
 D:\Project\GitHub Repo\NatLib\NatLib.Thumbnailer\obj\Debug\NatLib.Thumbnailer.csprojResolveAssemblyReference.cache
 D:\Project\GitHub Repo\NatLib\NatLib.Thumbnailer\obj\Debug\NatLib.Thumbnailer.dll
 D:\Project\GitHub Repo\NatLib\NatLib.Thumbnailer\obj\Debug\NatLib.Thumbnailer.pdb
+D:\Project\GitHub Repo\NatLib\NatLib.Thumbnailer\obj\Debug\NatLib.Thumbnailer.csproj.CoreCompileInputs.cache

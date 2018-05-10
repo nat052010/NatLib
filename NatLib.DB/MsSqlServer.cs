@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using NatLib.EventsArgs;
+using NatLib;
 
 namespace NatLib.DB
 {

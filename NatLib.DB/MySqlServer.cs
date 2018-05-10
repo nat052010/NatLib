@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using NatLib.EventsArgs;
+using NatLib;
 
 namespace NatLib.DB
 {

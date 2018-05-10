@@ -30,5 +30,7 @@ D:\Project\GitHub Repo\NatLib\NatLib\bin\Debug\NatLib.dll
 D:\Project\GitHub Repo\NatLib\NatLib\bin\Debug\NatLib.pdb
 D:\Project\GitHub Repo\NatLib\NatLib\bin\Debug\stdole.dll
 D:\Project\GitHub Repo\NatLib\NatLib\obj\Debug\NatLib.csprojResolveAssemblyReference.cache
+D:\Project\GitHub Repo\NatLib\NatLib\obj\Debug\NatLib.csproj.CoreCompileInputs.cache
+D:\Project\GitHub Repo\NatLib\NatLib\obj\Debug\NatLib.csproj.CopyComplete
 D:\Project\GitHub Repo\NatLib\NatLib\obj\Debug\NatLib.dll
 D:\Project\GitHub Repo\NatLib\NatLib\obj\Debug\NatLib.pdb

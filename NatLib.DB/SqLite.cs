@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.IO;
+using NatLib;
 
 namespace NatLib.DB
 {
@@ -18,14 +19,16 @@ namespace NatLib.DB
         public bool Vacuum { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
+        private bool _isFreshDB;
         //public string Folder { get; set; }
 
-        public SqLite()
+        public SqLite(bool isFreshDB = false)
         {
             Vacuum = true;
             Password = ConfigurationManager.AppSettings.Get("SQLitePassword");
             //Folder = "Db";
             Location = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Db");
+            _isFreshDB = isFreshDB;
         }
 
         public int Version
@@ -83,9 +86,19 @@ namespace NatLib.DB
                 if (conString == null)
                 {
                     var source = Name ?? config("SQLiteDataSource");
+                    string dbFile = Path.Combine(Location, (source ?? Guid.NewGuid().ToString() + ".db3"));
+
+                    if (_isFreshDB)
+                    {
+                        if (File.Exists(dbFile))
+                        {
+                            File.Delete(dbFile);
+                        }
+                    }
+
                     ConString = new SQLiteConnectionStringBuilder
                     {
-                        DataSource = Path.Combine(Location, (source ?? Guid.NewGuid().ToString() + ".db3")),
+                        DataSource = dbFile,
                         Version = Convert.ToInt32(config("SQLiteVersion") ?? "3")
                     };
                 }

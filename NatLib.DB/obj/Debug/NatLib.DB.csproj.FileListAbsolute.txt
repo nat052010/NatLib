@@ -39,6 +39,9 @@ D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Debug\NatLib.pdb
 D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Debug\EntityFramework.xml
 D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Debug\EntityFramework.SqlServer.xml
 D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Debug\System.Data.SQLite.xml
+D:\Project\GitHub Repo\NatLib\NatLib.DB\bin\Debug\System.Data.SQLite.dll.config
 D:\Project\GitHub Repo\NatLib\NatLib.DB\obj\Debug\NatLib.DB.csprojResolveAssemblyReference.cache
+D:\Project\GitHub Repo\NatLib\NatLib.DB\obj\Debug\NatLib.DB.csproj.CoreCompileInputs.cache
+D:\Project\GitHub Repo\NatLib\NatLib.DB\obj\Debug\NatLib.DB.csproj.CopyComplete
 D:\Project\GitHub Repo\NatLib\NatLib.DB\obj\Debug\NatLib.DB.dll
 D:\Project\GitHub Repo\NatLib\NatLib.DB\obj\Debug\NatLib.DB.pdb
